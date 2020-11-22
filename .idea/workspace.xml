@@ -6,15 +6,6 @@
         <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
         <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
       </path>
-      <path>
-        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
-      </path>
-      <path>
-        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
-      </path>
     </expand>
     <select />
   </component>
@@ -133,11 +124,6 @@
         <option name="CARGO.BUILD_TASK_PROVIDER" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="GradleAppRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true">
-      <method v="2">
-        <option name="com.jetbrains.cidr.cpp.gradle.execution.GradleNativeBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
     <list>
       <item itemvalue="Cargo.Test" />
       <item itemvalue="Cargo.Test test_write (1)" />
@@ -173,7 +159,7 @@
       <workItem from="1602873527644" duration="234000" />
       <workItem from="1602873827860" duration="105000" />
       <workItem from="1602874310648" duration="167000" />
-      <workItem from="1602874506388" duration="7669000" />
+      <workItem from="1602874506388" duration="8013000" />
     </task>
     <servers />
   </component>
@@ -208,25 +194,25 @@
       <screen x="1920" y="0" width="1920" height="1160" />
     </state>
     <state x="2660" y="335" key="FileChooserDialogImpl/0.0.1280.680/1920.0.1920.1160@1920.0.1920.1160" timestamp="1602873700295" />
-    <state width="1877" height="561" key="GridCell.Tab.0.bottom" timestamp="1602951812204">
+    <state width="1877" height="561" key="GridCell.Tab.0.bottom" timestamp="1602953978195">
       <screen x="0" y="0" width="1920" height="1160" />
     </state>
-    <state width="1877" height="561" key="GridCell.Tab.0.bottom/-1920.0.1280.693/0.0.1920.1160@0.0.1920.1160" timestamp="1602951812204" />
+    <state width="1877" height="561" key="GridCell.Tab.0.bottom/-1920.0.1280.693/0.0.1920.1160@0.0.1920.1160" timestamp="1602953978195" />
     <state width="1877" height="561" key="GridCell.Tab.0.bottom/0.0.1280.680/1920.0.1920.1160@1920.0.1920.1160" timestamp="1602878332667" />
-    <state width="1877" height="561" key="GridCell.Tab.0.center" timestamp="1602951812204">
+    <state width="1877" height="561" key="GridCell.Tab.0.center" timestamp="1602953978195">
       <screen x="0" y="0" width="1920" height="1160" />
     </state>
-    <state width="1877" height="561" key="GridCell.Tab.0.center/-1920.0.1280.693/0.0.1920.1160@0.0.1920.1160" timestamp="1602951812204" />
+    <state width="1877" height="561" key="GridCell.Tab.0.center/-1920.0.1280.693/0.0.1920.1160@0.0.1920.1160" timestamp="1602953978195" />
     <state width="1877" height="561" key="GridCell.Tab.0.center/0.0.1280.680/1920.0.1920.1160@1920.0.1920.1160" timestamp="1602878332666" />
-    <state width="1877" height="561" key="GridCell.Tab.0.left" timestamp="1602951812204">
+    <state width="1877" height="561" key="GridCell.Tab.0.left" timestamp="1602953978195">
       <screen x="0" y="0" width="1920" height="1160" />
     </state>
-    <state width="1877" height="561" key="GridCell.Tab.0.left/-1920.0.1280.693/0.0.1920.1160@0.0.1920.1160" timestamp="1602951812204" />
+    <state width="1877" height="561" key="GridCell.Tab.0.left/-1920.0.1280.693/0.0.1920.1160@0.0.1920.1160" timestamp="1602953978195" />
     <state width="1877" height="561" key="GridCell.Tab.0.left/0.0.1280.680/1920.0.1920.1160@1920.0.1920.1160" timestamp="1602878332666" />
-    <state width="1877" height="561" key="GridCell.Tab.0.right" timestamp="1602951812204">
+    <state width="1877" height="561" key="GridCell.Tab.0.right" timestamp="1602953978195">
       <screen x="0" y="0" width="1920" height="1160" />
     </state>
-    <state width="1877" height="561" key="GridCell.Tab.0.right/-1920.0.1280.693/0.0.1920.1160@0.0.1920.1160" timestamp="1602951812204" />
+    <state width="1877" height="561" key="GridCell.Tab.0.right/-1920.0.1280.693/0.0.1920.1160@0.0.1920.1160" timestamp="1602953978195" />
     <state width="1877" height="561" key="GridCell.Tab.0.right/0.0.1280.680/1920.0.1920.1160@1920.0.1920.1160" timestamp="1602878332666" />
     <state x="2513" y="400" key="Registry" timestamp="1602873095282">
       <screen x="1920" y="0" width="1920" height="1160" />
@@ -240,19 +226,19 @@
       <screen x="0" y="0" width="1920" height="1160" />
     </state>
     <state x="777" y="494" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/-1920.0.1280.693/0.0.1920.1160@0.0.1920.1160" timestamp="1602950139199" />
-    <state x="2586" y="313" width="1020" height="755" key="find.popup" timestamp="1602876650582">
-      <screen x="1920" y="0" width="1920" height="1160" />
+    <state x="666" y="313" width="587" height="534" key="find.popup" timestamp="1602953638479">
+      <screen x="0" y="0" width="1920" height="1160" />
     </state>
-    <state x="666" y="313" width="587" height="534" key="find.popup/-1920.0.1280.693/0.0.1920.1160@0.0.1920.1160" timestamp="1602863941280" />
+    <state x="666" y="313" width="587" height="534" key="find.popup/-1920.0.1280.693/0.0.1920.1160@0.0.1920.1160" timestamp="1602953638479" />
     <state x="2586" y="313" width="1020" height="755" key="find.popup/0.0.1280.680/1920.0.1920.1160@1920.0.1920.1160" timestamp="1602876650582" />
     <state x="2543" y="255" width="672" height="678" key="search.everywhere.popup" timestamp="1602873085036">
       <screen x="1920" y="0" width="1920" height="1160" />
     </state>
     <state x="623" y="255" width="672" height="678" key="search.everywhere.popup/-1920.0.1280.693/0.0.1920.1160@0.0.1920.1160" timestamp="1602842649191" />
     <state x="2543" y="255" width="672" height="678" key="search.everywhere.popup/0.0.1280.680/1920.0.1920.1160@1920.0.1920.1160" timestamp="1602873085036" />
-    <state x="682" y="377" key="vcs.readOnlyHandler.ReadOnlyStatusDialog" timestamp="1602862093253">
+    <state x="682" y="377" key="vcs.readOnlyHandler.ReadOnlyStatusDialog" timestamp="1602953776035">
       <screen x="0" y="0" width="1920" height="1160" />
     </state>
-    <state x="682" y="377" key="vcs.readOnlyHandler.ReadOnlyStatusDialog/-1920.0.1280.693/0.0.1920.1160@0.0.1920.1160" timestamp="1602862093253" />
+    <state x="682" y="377" key="vcs.readOnlyHandler.ReadOnlyStatusDialog/-1920.0.1280.693/0.0.1920.1160@0.0.1920.1160" timestamp="1602953776035" />
   </component>
 </project>
