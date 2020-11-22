@@ -23,6 +23,7 @@ macro_rules! num_var {
 num_var!(i32_var, i32);
 num_var!(i64_var, i64);
 num_var!(i128_var, i128);
+num_var!(u32_var, u32);
 num_var!(u128_var, u128);
 num_var!(f32_var, f32);
 num_var!(f64_var, f64);
