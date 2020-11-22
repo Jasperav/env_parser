@@ -2,3 +2,4 @@
 Cargo.lock
 /src/temp_env.env
 /src/temp_rs.rs
+.idea
