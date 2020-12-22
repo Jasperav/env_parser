@@ -19,9 +19,13 @@ pub fn read_env<T: Transform>(env_reader: &mut EnvReader<T>) {
     for line in env {
         let trimmed = line.trim();
 
-        if trimmed.is_empty() && env_reader.transformer.remove_comments_if_blank_line_occurs() {
-            // Remove all comments
-            comments_above_key = vec![];
+        if trimmed.is_empty() {
+            if env_reader.transformer.remove_comments_if_blank_line_occurs() {
+                // Remove all comments
+                comments_above_key = vec![];
+            }
+
+            continue;
         }
 
         // Check if the line is a comment
@@ -35,7 +39,7 @@ pub fn read_env<T: Transform>(env_reader: &mut EnvReader<T>) {
         //let (key, value) = trimmed.split_once('=').unwrap();
 
         let (key, value) = {
-            let split = trimmed.find('=').unwrap();
+            let split = trimmed.find('=').unwrap_or_else(|| panic!("No '=' found in: '{}'", trimmed));
 
             (&trimmed[0..split], &trimmed[split + 1..])
         };
@@ -59,14 +63,14 @@ pub fn read_env<T: Transform>(env_reader: &mut EnvReader<T>) {
 
 pub struct EnvReader<'a, T: Transform> {
     pub env: Vec<u8>,
-    pub transformer: &'a mut T
+    pub transformer: &'a mut T,
 }
 
-impl <'a, T: Transform> EnvReader<'a, T> {
+impl<'a, T: Transform> EnvReader<'a, T> {
     pub fn new(env: Vec<u8>, transformer: &'a mut T) -> EnvReader<'a, T> {
         EnvReader {
             env,
-            transformer
+            transformer,
         }
     }
 }
@@ -163,7 +167,7 @@ pub trait Transform {
     /// If this method returns true, the first comment will not be included when calling env_type
     /// in the comments parameter
     fn remove_comments_if_blank_line_occurs(&self) -> bool {
-        true
+        false
     }
 
     /// Writes the output
@@ -172,9 +176,9 @@ pub trait Transform {
 
 #[cfg(test)]
 mod locations {
-    use std::path::PathBuf;
     use std::fs::File;
-    use std::io::{Read};
+    use std::io::Read;
+    use std::path::PathBuf;
 
     pub fn src() -> PathBuf {
         std::env::current_dir().unwrap().join("src")
@@ -202,7 +206,6 @@ mod locations {
         std::fs::remove_file(temp_rs()).unwrap();
     }
 }
-
 
 #[test]
 fn test_write() {
