@@ -14,10 +14,12 @@ macro_rules! num_var {
 num_var!(i32_var, i32);
 num_var!(i64_var, i64);
 num_var!(i128_var, i128);
+num_var!(u32_var, u32);
 num_var!(u128_var, u128);
 num_var!(f32_var, f32);
 num_var!(f64_var, f64);
 num_var!(usize_var, usize);
+num_var!(bool_var, bool);
 
 lazy_static::lazy_static! {
     pub static ref SOME_KEY: String = string_var("SOME_KEY");
@@ -26,4 +28,5 @@ lazy_static::lazy_static! {
     pub static ref SOME_I64_VAL: i32 = i32_var("SOME_I64_VAL");
     pub static ref SOME_F32: f32 = f32_var("SOME_F32");
     pub static ref ANOTHER_F32: f32 = f32_var("ANOTHER_F32");
+    pub static ref BOOL_TRUE: bool = bool_var("BOOL_TRUE");
 }

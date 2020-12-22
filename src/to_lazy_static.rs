@@ -28,6 +28,7 @@ num_var!(u128_var, u128);
 num_var!(f32_var, f32);
 num_var!(f64_var, f64);
 num_var!(usize_var, usize);
+num_var!(bool_var, bool);
 
 lazy_static::lazy_static! {").unwrap();
 

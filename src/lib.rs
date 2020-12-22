@@ -40,15 +40,14 @@ pub fn read_env<T: Transform>(env_reader: &mut EnvReader<T>) {
             (&trimmed[0..split], &trimmed[split + 1..])
         };
 
-        // Check if value can be converted to i32
-        let env_type = match value.parse::<i32>() {
-            Ok(o) => EnvType::I32(o),
-            // Conversation failed, check if it's a f32
-            Err(_) => match value.parse::<f32>() {
-                Ok(o) => EnvType::F32(o),
-                // Also failed, make it a string
-                Err(_) => EnvType::StaticStr(value.to_string())
-            }
+        let env_type = if let Ok(o) = value.parse::<i32>() {
+            EnvType::I32(o)
+        } else if let Ok(o) = value.parse::<f32>() {
+            EnvType::F32(o)
+        } else if let Ok(o) = value.parse::<bool>() {
+            EnvType::Bool(o)
+        } else {
+            EnvType::StaticStr(value.to_string())
         };
 
         env_reader.transformer.write(comments_above_key.clone(), key, env_type);
@@ -82,6 +81,7 @@ pub trait CustomMap {
 
 /// The different values an env file can hold
 pub enum EnvType {
+    Bool(bool),
     I32(i32),
     I64(i64),
     I128(i128),
@@ -99,6 +99,7 @@ impl EnvType {
     /// The Rust type
     pub fn rust_type(&self) -> String {
         match self {
+            EnvType::Bool(_) => "bool".to_string(),
             EnvType::I32(_) => "i32".to_string(),
             EnvType::I64(_) => "i64".to_string(),
             EnvType::I128(_) => "i128".to_string(),
@@ -115,6 +116,7 @@ impl EnvType {
     /// The actual value the env property holds
     pub fn raw_value(&self) -> String {
         match self {
+            EnvType::Bool(val) => val.to_string(),
             EnvType::I32(val) => val.to_string(),
             EnvType::I64(val) => val.to_string(),
             EnvType::I128(val) => val.to_string(),
@@ -134,7 +136,7 @@ impl EnvType {
     /// const MY_VARIABLE: f32 = 1;
     /// ```
     /// The following compile error occurs: mismatched types [E0308] expected `f32`, found `i32`
-    /// Thats why the type is needed behind the value:
+    /// That's why the type is needed behind the value:
     /// ```
     /// const MY_VARIABLE: f32 = 1f32;
     /// ```
@@ -142,7 +144,7 @@ impl EnvType {
         let ty = self.raw_value();
 
         match self {
-            EnvType::StaticStr(_) => ty,
+            EnvType::StaticStr(_) | EnvType::Bool(_) => ty,
             EnvType::Custom(c) => c.value(),
             _ => ty + &self.rust_type()
         }

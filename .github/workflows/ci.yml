@@ -31,7 +31,7 @@ jobs:
       - name: fix
         run: cargo +nightly fix --all-features --allow-dirty --allow-staged --jobs=1
       - name: test
-        run: cargo +nightly test --verbose -- --test-threads=1
+        run: cargo +nightly test --all-features --verbose -- --test-threads=1
       - name: clippy
         run: cargo +nightly clippy --fix -Z unstable-options --allow-dirty --allow-staged
       - name: clean
