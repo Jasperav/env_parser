@@ -8,11 +8,8 @@ pub mod to_lazy_static;
 ///     3. String (always succeeds)
 /// If you want a different type to be parsed, do that in the transformer trait.
 pub fn read_env<T: Transform>(env_reader: &mut EnvReader<T>) {
-    let raw = String::from_utf8(env_reader.env.clone())
-        .unwrap();
-    let env = raw
-        .split('\n')
-        .collect::<Vec<_>>();
+    let raw = String::from_utf8(env_reader.env.clone()).unwrap();
+    let env = raw.split('\n').collect::<Vec<_>>();
 
     let mut comments_above_key = vec![];
 
@@ -20,7 +17,10 @@ pub fn read_env<T: Transform>(env_reader: &mut EnvReader<T>) {
         let trimmed = line.trim();
 
         if trimmed.is_empty() {
-            if env_reader.transformer.remove_comments_if_blank_line_occurs() {
+            if env_reader
+                .transformer
+                .remove_comments_if_blank_line_occurs()
+            {
                 // Remove all comments
                 comments_above_key = vec![];
             }
@@ -39,7 +39,9 @@ pub fn read_env<T: Transform>(env_reader: &mut EnvReader<T>) {
         //let (key, value) = trimmed.split_once('=').unwrap();
 
         let (key, value) = {
-            let split = trimmed.find('=').unwrap_or_else(|| panic!("No '=' found in: '{}'", trimmed));
+            let split = trimmed
+                .find('=')
+                .unwrap_or_else(|| panic!("No '=' found in: '{}'", trimmed));
 
             (&trimmed[0..split], &trimmed[split + 1..])
         };
@@ -54,7 +56,9 @@ pub fn read_env<T: Transform>(env_reader: &mut EnvReader<T>) {
             EnvType::StaticStr(value.to_string())
         };
 
-        env_reader.transformer.write(comments_above_key.clone(), key, env_type);
+        env_reader
+            .transformer
+            .write(comments_above_key.clone(), key, env_type);
 
         // Prepare for a new loop
         comments_above_key = vec![];
@@ -68,10 +72,7 @@ pub struct EnvReader<'a, T: Transform> {
 
 impl<'a, T: Transform> EnvReader<'a, T> {
     pub fn new(env: Vec<u8>, transformer: &'a mut T) -> EnvReader<'a, T> {
-        EnvReader {
-            env,
-            transformer,
-        }
+        EnvReader { env, transformer }
     }
 }
 
@@ -114,7 +115,8 @@ impl EnvType {
             EnvType::USize(_) => "usize".to_string(),
             EnvType::StaticStr(_) => "&'static str".to_string(),
             EnvType::Custom(c) => c.rust_type(),
-        }.replace("\"", "")
+        }
+        .replace("\"", "")
     }
 
     /// The actual value the env property holds
@@ -150,7 +152,7 @@ impl EnvType {
         match self {
             EnvType::StaticStr(_) | EnvType::Bool(_) => ty,
             EnvType::Custom(c) => c.value(),
-            _ => ty + &self.rust_type()
+            _ => ty + &self.rust_type(),
         }
     }
 }
@@ -195,10 +197,16 @@ mod locations {
     pub fn check_equals(to_check: &str) {
         // Check if the generated file is equal to what is expected
         let mut assert_test = String::new();
-        File::open(src().join(to_check)).unwrap().read_to_string(&mut assert_test).unwrap();
+        File::open(src().join(to_check))
+            .unwrap()
+            .read_to_string(&mut assert_test)
+            .unwrap();
 
         let mut temp_rs_string = String::new();
-        File::open(temp_rs()).unwrap().read_to_string(&mut temp_rs_string).unwrap();
+        File::open(temp_rs())
+            .unwrap()
+            .read_to_string(&mut temp_rs_string)
+            .unwrap();
 
         // On windows, the left file somehow has \r inside the file but the right file doesn't
         assert_eq!(assert_test.replace('\r', ""), temp_rs_string);
@@ -209,13 +217,13 @@ mod locations {
 
 #[test]
 fn test_write() {
-    use crate::locations::{env, temp_rs, check_equals};
-    use std::io::Write;
+    use crate::locations::{check_equals, env, temp_rs};
     use std::fs::File;
+    use std::io::Write;
 
     // Create a transformer that writes the output to a Rust file
     struct TransformerImpl {
-        file: File
+        file: File,
     }
 
     impl Transform for TransformerImpl {
@@ -230,15 +238,23 @@ fn test_write() {
                 inferred_type
             };
 
-            let declaration = format!("pub const {}: {} = {};", key, inferred_type.rust_type(), inferred_type.value());
+            let declaration = format!(
+                "pub const {}: {} = {};",
+                key,
+                inferred_type.rust_type(),
+                inferred_type.value()
+            );
 
             writeln!(&self.file, "{}", declaration).unwrap();
         }
     }
 
-    read_env(&mut EnvReader::new(env(), &mut TransformerImpl {
-        file: File::create(&temp_rs()).unwrap()
-    }));
+    read_env(&mut EnvReader::new(
+        env(),
+        &mut TransformerImpl {
+            file: File::create(&temp_rs()).unwrap(),
+        },
+    ));
 
     check_equals("assert_test.rs");
 }
