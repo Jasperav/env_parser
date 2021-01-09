@@ -22,21 +22,9 @@ jobs:
           profile: minimal
           toolchain: nightly
           components: rustfmt, clippy
-      - name: clean
-        run: cargo +nightly clean
-      - name: build
-        run: cargo +nightly build --jobs=1
-      - name: fmt
-        run: cargo +nightly fmt
-      - name: fix
-        run: cargo +nightly fix --all-features --allow-dirty --allow-staged --jobs=1
       - name: test
-        run: cargo +nightly test --all-features --verbose -- --test-threads=1
+        run: cargo test --all-features --verbose
+      - name: fmt
+        run: cargo fmt --verbose --all -- --check
       - name: clippy
-        run: cargo +nightly clippy --fix -Z unstable-options --allow-dirty --allow-staged
-      - name: clean
-        run: cargo +nightly clean
-      - name: build
-        run: cargo +nightly build --jobs=1
-      - name: clippy
-        run: cargo +nightly clippy -- -D warnings
+        run: cargo clippy -- -D warnings
