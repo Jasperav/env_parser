@@ -1,6 +1,6 @@
 [package]
 name = "env_parser"
-version = "0.1.4"
+version = "0.1.5"
 authors = ["Jasper Visser <jasperav@hotmail.com>"]
 edition = "2018"
 description = "Env parser. Parse your env file and create a Rust file with mapped properties"

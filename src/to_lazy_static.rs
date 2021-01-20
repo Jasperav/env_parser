@@ -89,6 +89,27 @@ pub trait LazyTransform: Transform {
     ) -> (String, EnvType);
 }
 
+/// Struct that makes parsing easier if parsing doesn't require customization
+pub struct LazyTransformDefault {
+    pub file: File,
+}
+
+impl Transform for LazyTransformDefault {
+    fn write(&mut self, comments: Vec<String>, key: &str, inferred_type: EnvType) {
+        self.lazy_static_write(comments, key, inferred_type)
+    }
+}
+
+impl LazyTransform for LazyTransformDefault {
+    fn file_to_write(&mut self) -> &mut File {
+        &mut self.file
+    }
+
+    fn key_value(&mut self, _comments: Vec<String>, key: &str, inferred_type: EnvType) -> (String, EnvType) {
+        (key.to_string(), inferred_type)
+    }
+}
+
 #[test]
 fn lazy() {
     use crate::locations::env;
