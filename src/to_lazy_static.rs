@@ -106,7 +106,12 @@ impl LazyTransform for LazyTransformDefault {
         &mut self.file
     }
 
-    fn key_value(&mut self, _comments: Vec<String>, key: &str, inferred_type: EnvType) -> (String, EnvType) {
+    fn key_value(
+        &mut self,
+        _comments: Vec<String>,
+        key: &str,
+        inferred_type: EnvType,
+    ) -> (String, EnvType) {
         (key.to_string(), inferred_type)
     }
 }
