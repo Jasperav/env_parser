@@ -53,7 +53,15 @@ pub fn read_env<T: Transform>(env_reader: &mut EnvReader<T>) {
         } else if let Ok(o) = value.parse::<bool>() {
             EnvType::Bool(o)
         } else {
-            EnvType::StaticStr(value.to_string())
+            let string_value = value.to_string();
+
+            assert!(
+                !string_value.is_empty(),
+                "Value is empty, this is not allowed for key: {}",
+                key
+            );
+
+            EnvType::StaticStr(string_value)
         };
 
         env_reader
@@ -118,7 +126,7 @@ impl EnvType {
             EnvType::StaticStr(_) => "&'static str".to_string(),
             EnvType::Custom(c) => c.rust_type(),
         }
-        .replace("\"", "")
+        .replace('\"', "")
     }
 
     /// The actual value the env property holds
@@ -134,7 +142,7 @@ impl EnvType {
             EnvType::F32(val) => val.to_string(),
             EnvType::F64(val) => val.to_string(),
             EnvType::USize(val) => val.to_string(),
-            EnvType::StaticStr(val) => format!("\"{}\"", val.to_string()),
+            EnvType::StaticStr(val) => format!("\"{}\"", val),
             EnvType::Custom(c) => c.raw_value(),
         }
     }

@@ -10,7 +10,7 @@ license = "MIT/Apache-2.0"
 repository = "https://github.com/jasperav/env_parser"
 
 [dev-dependencies]
-indoc = "1.0"
+indoc = "2.0.4"
 
 [features]
 to_lazy_static = []
