@@ -55,11 +55,7 @@ pub fn read_env<T: Transform>(env_reader: &mut EnvReader<T>) {
         } else {
             let string_value = value.to_string();
 
-            assert!(
-                !string_value.is_empty(),
-                "Value is empty, this is not allowed for key: {}",
-                key
-            );
+            // Empty value is ignored and saved as a string type
 
             EnvType::StaticStr(string_value)
         };
