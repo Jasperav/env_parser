@@ -1,5 +1,5 @@
 fn string_var(v: &str) -> String {
-    std::env::var(v).unwrap()
+    std::env::var(v).unwrap_or_else(|| panic!("No value for {v}"))
 }
 
 macro_rules! num_var {

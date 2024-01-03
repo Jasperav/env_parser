@@ -10,8 +10,8 @@ pub fn read_env<T: LazyTransform>(env_reader: &mut EnvReader<T>) {
     writeln!(
         env_reader.transformer.file_to_write(),
         "{}",
-        r"fn string_var(v: &str) -> String {
-    std::env::var(v).unwrap()
+        r#"fn string_var(v: &str) -> String {
+    std::env::var(v).unwrap_or_else(|| panic!("No value for {v}"))
 }
 
 macro_rules! num_var {
@@ -34,7 +34,7 @@ num_var!(f64_var, f64);
 num_var!(usize_var, usize);
 num_var!(bool_var, bool);
 
-lazy_static::lazy_static! {"
+lazy_static::lazy_static! {"#
     )
     .unwrap();
 
